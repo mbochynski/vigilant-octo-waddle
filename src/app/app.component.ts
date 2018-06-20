@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { initializeApp } from 'firebase';
-
-import firebaseConfig from '../firebase.config';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +8,5 @@ import firebaseConfig from '../firebase.config';
 export class AppComponent {
 
   constructor() {
-    initializeApp(firebaseConfig);
   }
 }
