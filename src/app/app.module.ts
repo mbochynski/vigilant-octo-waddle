@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { MetersListComponent } from './meters-list/meters-list.component';
 import { MeterDetailsComponent } from './meter-details/meter-details.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MetersListComponent,
-    MeterDetailsComponent
+    MeterDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
