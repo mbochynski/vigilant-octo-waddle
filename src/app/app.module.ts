@@ -6,7 +6,7 @@ import { MetersListComponent } from './meters-list/meters-list.component';
 import { MeterDetailsComponent } from './meter-details/meter-details.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
 
 
 @NgModule({

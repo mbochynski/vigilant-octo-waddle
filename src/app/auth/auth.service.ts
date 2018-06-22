@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { auth, initializeApp } from 'firebase';
 
-import firebaseConfig from '../firebase.config';
+import firebaseConfig from '../../firebase.config';
 import { Router } from '@angular/router';
 
 @Injectable()
