@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  authorized = false;
+  isAuthorized = false;
   isAnonymous = false;
   uid: string;
 
@@ -19,13 +19,13 @@ export class AuthService {
 
     auth().onAuthStateChanged(function(user) {
       if (user) {
-        this.authorized = true;
+        this.isAuthorized = true;
         this.isAnonymous = user.isAnonymous;
         this.uid = user.uid;
         console.log('User is logged in', this.uid);
         router.navigate(['/']);
       } else {
-        this.authorized = false;
+        this.isAuthorized = false;
         this.isAnonymous = false;
         this.uid = null;
         console.log('User is logged out');
