@@ -7,6 +7,7 @@ import { MeterDetailsComponent } from './meter-details/meter-details.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { AuthService } from './auth/auth.service';
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
