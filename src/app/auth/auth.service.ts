@@ -17,7 +17,7 @@ export class AuthService {
       console.error(e);
     }
 
-    auth().onAuthStateChanged(function(user) {
+    auth().onAuthStateChanged((user) => {
       if (user) {
         this.isAuthorized = true;
         this.isAnonymous = user.isAnonymous;
