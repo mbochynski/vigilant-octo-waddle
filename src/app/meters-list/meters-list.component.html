@@ -1,3 +1,7 @@
-<p>
-  meters-list works!
+<p *ngIf="meters.length <= 0">
+  Nie masz dodanych żadnych liczników. Dodaj jeden aby zacząć.
 </p>
+<ul>
+  <li *ngFor="let meter of meters">{{ meter.name }}</li>
+</ul>
+<button type="button">Dodaj nowy licznik</button>
