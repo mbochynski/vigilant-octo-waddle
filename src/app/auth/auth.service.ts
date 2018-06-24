@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { auth, initializeApp } from 'firebase';
+import { auth, initializeApp, User } from 'firebase';
 
 import firebaseConfig from '../../firebase.config';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
   isAuthorized = false;
   isAnonymous = false;
   uid: string;
+
+  userSubject = new BehaviorSubject<User>(null);
 
   constructor(router: Router) { 
     try {
@@ -31,6 +34,7 @@ export class AuthService {
         console.log('User is logged out');
         router.navigate(['/login']);
       }
+      this.userSubject.next(user);
     });
   }
 
