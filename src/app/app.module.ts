@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
+import { StorageService } from './storage.service';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { AuthGuard } from './auth/auth.guard';
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
