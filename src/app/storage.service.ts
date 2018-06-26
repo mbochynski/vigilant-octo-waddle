@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { firestore } from 'firebase';
 import { AuthService } from './auth/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import Meter from './meter.model';
 
 const COLLECTION = 'meters';
@@ -10,6 +10,11 @@ enum Status {
   INIT,
   FETCHING,
   READY,
+}
+
+export interface MetersSubject {
+  status: Status,
+  meters: Meter[],
 }
 
 @Injectable()
@@ -21,6 +26,8 @@ export class StorageService implements OnDestroy {
   private status = Status.INIT;
 
   private meters: Meter[] = [];
+
+  public metersSubject: BehaviorSubject<MetersSubject> = new BehaviorSubject({ status: this.status, meters: []});
 
   constructor(private authService: AuthService) { 
     console.log('create user subscription in storage service');
@@ -61,15 +68,21 @@ export class StorageService implements OnDestroy {
       } else {
         this.meters = [];
       }
+      this.metersSubject.next({
+        status: this.status,
+        meters: this.meters,
+      });
     }); 
   }
 
   private stopFetchingData() {
     console.log('stop fetching data');
     this.firebaseUnsubscribe();
-  }
-
-  getMeters() {
-    return this.meters;
+    this.meters = [];
+    this.status = Status.INIT;
+    this.metersSubject.next({
+      status: this.status,
+      meters: this.meters,
+    });
   }
 }
