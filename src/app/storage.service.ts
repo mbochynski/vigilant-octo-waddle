@@ -57,7 +57,7 @@ export class StorageService implements OnDestroy {
   private startFetchingData(uid: string) {
     this.status = Status.FETCHING;
     console.log('start fetching data', uid);
-    this.firebaseUnsubscribe = firestore().collection(COLLECTION).doc(uid).onSnapshot((doc) => {
+    this.firebaseUnsubscribe = this.db.collection(COLLECTION).doc(uid).onSnapshot((doc) => {
       this.status = Status.READY;
       const data = doc.data();
 
