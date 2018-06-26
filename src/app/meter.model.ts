@@ -5,14 +5,9 @@ interface MeterEntry {
   value: number,
 }
 
-class Meter {
-  name: string;
-  entries: MeterEntry[];
-
-  constructor(name: string, entries: MeterEntry[]) {
-    this.name = name;
-    this.entries = entries;
-  }
-} 
+interface Meter {
+  name: string,
+  entries: MeterEntry[],
+}
 
 export default Meter;

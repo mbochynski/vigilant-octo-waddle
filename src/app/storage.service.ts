@@ -62,9 +62,7 @@ export class StorageService implements OnDestroy {
       const data = doc.data();
 
       if (data) {
-        this.meters = data.list.map(meter => {
-          return new Meter(meter.name, meter.entries);
-        });
+        this.meters = <Meter[]>data.list;
       } else {
         this.meters = [];
       }
