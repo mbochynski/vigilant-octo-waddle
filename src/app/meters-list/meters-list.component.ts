@@ -26,4 +26,7 @@ export class MetersListComponent implements OnInit, OnDestroy {
     this.metersSubscription.unsubscribe();
   }
 
+  onAddNewMeter() {
+    this.storageService.addNewMeter('some fancy name');
+  }
 }

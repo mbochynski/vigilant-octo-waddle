@@ -24,6 +24,7 @@ export class StorageService implements OnDestroy {
   private userSubscription: Subscription;
   private firebaseUnsubscribe: Function;
   private status = Status.INIT;
+  private docRef: firestore.DocumentReference;
 
   private meters: Meter[] = [];
 
@@ -57,7 +58,8 @@ export class StorageService implements OnDestroy {
   private startFetchingData(uid: string) {
     this.status = Status.FETCHING;
     console.log('start fetching data', uid);
-    this.firebaseUnsubscribe = this.db.collection(COLLECTION).doc(uid).onSnapshot((doc) => {
+    this.docRef = this.db.collection(COLLECTION).doc(uid);
+    this.firebaseUnsubscribe = this.docRef.onSnapshot((doc) => {
       this.status = Status.READY;
       const data = doc.data();
 
@@ -78,9 +80,26 @@ export class StorageService implements OnDestroy {
     this.firebaseUnsubscribe();
     this.meters = [];
     this.status = Status.INIT;
+    this.docRef = null;
     this.metersSubject.next({
       status: this.status,
       meters: this.meters,
+    });
+  }
+
+  public addNewMeter(name) {
+    this.meters.push({
+      name: 'newly created meter',
+      entries: [],
+    });   
+
+    this.docRef.set({
+      list: this.meters,
+    }).then(() => {
+      console.log('Saving document succedded');
+    })
+    .catch((error) => {
+      console.log('Saving document failed', error);
     });
   }
 }

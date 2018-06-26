@@ -4,4 +4,4 @@
 <ul>
   <li *ngFor="let meter of meters">{{ meter.name }}</li>
 </ul>
-<button type="button">Dodaj nowy licznik</button>
+<button type="button" (click)="onAddNewMeter()">Dodaj nowy licznik</button>
