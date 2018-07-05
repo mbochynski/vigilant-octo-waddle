@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MetersListComponent } from './meters-list/meters-list.component';
@@ -21,6 +22,7 @@ import { StorageService } from './storage.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService, AuthGuard, StorageService],
   bootstrap: [AppComponent]

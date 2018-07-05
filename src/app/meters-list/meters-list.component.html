@@ -2,6 +2,8 @@
   Nie masz dodanych żadnych liczników. Dodaj jeden aby zacząć.
 </p>
 <ul>
-  <li *ngFor="let meter of meters">{{ meter.name }}</li>
+  <li *ngFor="let meter of meters; index as i">
+    <a [routerLink]="'../meter/' + i">{{ meter.name }}</a>
+  </li>
 </ul>
 <button type="button" (click)="onAddNewMeter()">Dodaj nowy licznik</button>

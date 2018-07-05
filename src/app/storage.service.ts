@@ -77,7 +77,10 @@ export class StorageService implements OnDestroy {
 
   private stopFetchingData() {
     console.log('stop fetching data');
-    this.firebaseUnsubscribe();
+    if (this.firebaseUnsubscribe) {
+      this.firebaseUnsubscribe();
+      this.firebaseUnsubscribe = null;
+    }
     this.meters = [];
     this.status = Status.INIT;
     this.docRef = null;
@@ -85,6 +88,12 @@ export class StorageService implements OnDestroy {
       status: this.status,
       meters: this.meters,
     });
+  }
+
+  private saveDocument() {
+    this.docRef.update({
+      list: this.meters,
+    })
   }
 
   public addNewMeter(name) {
@@ -101,5 +110,11 @@ export class StorageService implements OnDestroy {
     .catch((error) => {
       console.log('Saving document failed', error);
     });
+  }
+
+  public addMeterEntry(meterId: number, value: number, date: Date) {
+    const timestamp = firestore.Timestamp.fromDate(date);
+    this.meters[meterId].entries.push({ value, timestamp });
+    this.saveDocument();
   }
 }

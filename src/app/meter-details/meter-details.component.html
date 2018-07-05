@@ -1,3 +1,31 @@
-<p>
-  meter-details works!
+<h2>{{ meter.name }}</h2>
+
+<button>Add new entry</button>
+
+<form [formGroup]="newEntryFormGroup" (ngSubmit)="handleSubmit()">
+  <label>
+    Wartość:
+    <input name="value" formControlName="value" type="number"/>
+  </label>
+  <label>
+    Data:
+    <input name="date" formControlName="date" type="date"/>
+  </label>
+  <button type="submit">Dodaj</button>
+</form>
+<p *ngIf="invalidFormMessage">
+  Form is invalid: {{ invalidFormMessage }}
 </p>
+
+<table>
+  <thead>
+    <th>Data</th>
+    <th>Odczyt</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of meter.entries">
+      <td>{{ entry.timestamp }}</td>
+      <td>{{ entry.value }}</td>
+    </tr>
+  </tbody>
+</table>
